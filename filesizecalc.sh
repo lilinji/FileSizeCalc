@@ -17,7 +17,8 @@ echo "Below are the file(s) with size greater than $SIZE in $FS_CHOICE!"
 find $FS_CHOICE -xdev -size +$SIZE -exec ls -ltrh {} \;
 if [ $? -eq 0 ]
 then
+  echo ""
+  echo "Thanks for using FileSizeCalc(). Hope to see you soon :-)"
+else
   echo "Sorry, there were not any files bigger than $SIZE. Please try with a lower size."
 fi
-echo ""
-echo "Thanks for using FileSizeCalc(). Hope to see you soon :-)"
