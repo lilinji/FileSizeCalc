@@ -12,13 +12,14 @@ read CHOICE
 SIZE=`echo $CHOICE | sed 's/ //g'`
 echo -n "Enter the filesystem. For example, /home... /"
 read FS_CHOICE
-echo "Great! You chose to search for file(s) greater than $SIZE in $FS_CHOICE!"
-echo "Below are the file(s) with size greater than $SIZE in $FS_CHOICE!"
-find $FS_CHOICE -xdev -size +$SIZE -exec ls -ltrh {} \;
-if [ $? -eq 0 ]
+echo "Great! You chose to search for file(s) greater than $SIZE in /$FS_CHOICE!"
+echo "Below are the file(s) with size greater than $SIZE in /$FS_CHOICE!"
+numRes=`find /$FS_CHOICE -xdev -size +$SIZE -exec ls -ltrh {} \; | wc -l`
+find /$FS_CHOICE -xdev -size +$SIZE -exec ls -ltrh {} \;
+if [ $numRes -eq 0 ]
 then
+  echo "Sorry, there were not any files bigger than $SIZE. Please try with a lower size."
+else
   echo ""
   echo "Thanks for using FileSizeCalc(). Hope to see you soon :-)"
-else
-  echo "Sorry, there were not any files bigger than $SIZE. Please try with a lower size."
 fi
